@@ -1,0 +1,102 @@
+# Google Cloud Build configuration for deploying to Cloud Run
+steps:
+  # Build Backend Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/shafi-backend:$COMMIT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/shafi-backend:latest'
+      - './backend'
+    id: 'build-backend'
+
+  # Build Frontend Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/shafi-frontend:$COMMIT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/shafi-frontend:latest'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_API_URL=${_API_URL}'
+      - './frontend'
+    id: 'build-frontend'
+
+  # Push Backend Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/shafi-backend:$COMMIT_SHA']
+    id: 'push-backend'
+    waitFor: ['build-backend']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/shafi-backend:latest']
+    waitFor: ['push-backend']
+
+  # Push Frontend Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/shafi-frontend:$COMMIT_SHA']
+    id: 'push-frontend'
+    waitFor: ['build-frontend']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/shafi-frontend:latest']
+    waitFor: ['push-frontend']
+
+  # Deploy Backend to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'shafi-backend'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/shafi-backend:$COMMIT_SHA'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '4000'
+      - '--set-env-vars'
+      - 'MONGO_URI=${_MONGO_URI},CLOUDINARY_CLOUD_NAME=${_CLOUDINARY_CLOUD_NAME},CLOUDINARY_API_KEY=${_CLOUDINARY_API_KEY},CLOUDINARY_API_SECRET=${_CLOUDINARY_API_SECRET}'
+    id: 'deploy-backend'
+    waitFor: ['push-backend']
+
+  # Deploy Frontend to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'shafi-frontend'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/shafi-frontend:$COMMIT_SHA'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '3000'
+    id: 'deploy-frontend'
+    waitFor: ['push-frontend', 'deploy-backend']
+
+substitutions:
+  _REGION: 'me-west1'  # Middle East (Tel Aviv) - closest to Saudi Arabia
+  _API_URL: 'https://shafi-backend-XXXXX.run.app/api/v1'
+  _MONGO_URI: ''
+  _CLOUDINARY_CLOUD_NAME: 'dlsobyta0'
+  _CLOUDINARY_API_KEY: ''
+  _CLOUDINARY_API_SECRET: ''
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+images:
+  - 'gcr.io/$PROJECT_ID/shafi-backend:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/shafi-backend:latest'
+  - 'gcr.io/$PROJECT_ID/shafi-frontend:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/shafi-frontend:latest'
