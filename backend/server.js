@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 4000;
 const allowedOrigins = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'https://shafi-d.vercel.app',
     process.env.FRONTEND_URL, // Cloud Run frontend URL
 ].filter(Boolean);
 
@@ -21,10 +22,11 @@ app.use(cors({
         // Allow requests with no origin (mobile apps, curl, etc)
         if (!origin) return callback(null, true);
 
-        // Check if origin is allowed or is a Cloud Run URL
+        // Check if origin is allowed or is a Cloud Run/Vercel URL
         if (allowedOrigins.includes(origin) ||
             origin.endsWith('.run.app') ||
-            origin.endsWith('.web.app')) {
+            origin.endsWith('.web.app') ||
+            origin.endsWith('.vercel.app')) {
             return callback(null, true);
         }
 
