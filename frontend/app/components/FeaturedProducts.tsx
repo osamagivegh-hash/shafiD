@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Star, ShoppingCart } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
-const BACKEND_URL = 'http://localhost:4000';
+import { API_URL, BACKEND_URL } from '../lib/config';
 
 interface Product {
     _id: string;

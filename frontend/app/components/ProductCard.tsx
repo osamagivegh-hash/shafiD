@@ -3,8 +3,7 @@
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { useState } from 'react';
-
-const BACKEND_URL = 'http://localhost:4000';
+import { BACKEND_URL } from '../lib/config';
 
 interface ProductCardProps {
     title: string;

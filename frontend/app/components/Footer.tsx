@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Instagram, Twitter, Phone, Mail, MapPin, Clock } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
+import { API_URL } from '../lib/config';
 
 interface FooterContent {
     email: string;

@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import { useToast } from '../../../components/Toast';
 import ImageUploader from '../../../components/ImageUploader';
 import { Plus, Edit2, Trash2, Save, X, Eye, EyeOff } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
+import { API_URL, BACKEND_URL } from '../../../lib/config';
 
 interface HeroSlide {
     _id: string;
@@ -251,7 +250,7 @@ export default function HeroManagement() {
                                         <div className="w-24 h-14 bg-gradient-to-br from-amber-100 to-orange-50 rounded-lg overflow-hidden">
                                             {slide.imagePath ? (
                                                 <img
-                                                    src={`http://localhost:4000${slide.imagePath}`}
+                                                    src={slide.imagePath.startsWith('http') ? slide.imagePath : `${BACKEND_URL}${slide.imagePath}`}
                                                     alt=""
                                                     className="w-full h-full object-cover"
                                                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}

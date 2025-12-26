@@ -6,9 +6,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { Star, ShoppingCart, Minus, Plus, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-
-const API_URL = 'http://localhost:4000/api/v1';
-const BACKEND_URL = 'http://localhost:4000';
+import { API_URL, BACKEND_URL } from '../../lib/config';
 
 interface Product {
     _id: string;

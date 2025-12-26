@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-
-const API_URL = 'http://localhost:4000/api/v1';
-const BACKEND_URL = 'http://localhost:4000';
+import { API_URL, BACKEND_URL } from '../lib/config';
 
 interface HeroSlide {
     _id?: string;

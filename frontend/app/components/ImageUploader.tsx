@@ -2,9 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Upload, X, Cloud, HardDrive } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
-const BACKEND_URL = 'http://localhost:4000';
+import { API_URL, BACKEND_URL } from '../lib/config';
 
 interface ImageUploaderProps {
     category: 'hero' | 'dates' | 'honey' | 'oud' | 'spices';
@@ -168,8 +166,8 @@ export default function ImageUploader({ category, currentImage, onImageUploaded,
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     className={`relative border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${dragOver
-                            ? 'border-amber-500 bg-amber-50'
-                            : 'border-gray-300 hover:border-amber-400 hover:bg-gray-50'
+                        ? 'border-amber-500 bg-amber-50'
+                        : 'border-gray-300 hover:border-amber-400 hover:bg-gray-50'
                         }`}
                 >
                     {uploading ? (

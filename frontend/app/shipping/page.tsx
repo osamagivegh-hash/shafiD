@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Truck, Clock, MapPin, Package, RefreshCw, Shield, Phone } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
+import { API_URL } from '../lib/config';
 
 interface ShippingContent {
     pageTitle: string;
