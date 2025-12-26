@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useToast } from '../../../components/Toast';
 import ImageUploader from '../../../components/ImageUploader';
 import { Plus, Edit2, Trash2, Save, X } from 'lucide-react';
+import { API_URL, BACKEND_URL } from '../../../lib/config';
 
-const API_URL = 'http://localhost:4000/api/v1';
 const dateTypes = ['Khalas', 'Ajwa', 'Sukkary', 'Medjool', 'Safawi', 'Other'];
 
 interface DateProduct {
@@ -134,7 +134,7 @@ export default function DatesManagement() {
                             <tr key={p._id} className="border-t hover:bg-gray-50">
                                 <td className="px-4 py-3">
                                     <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
-                                        {p.imagePath && <img src={`http://localhost:4000${p.imagePath}`} alt="" className="w-full h-full object-cover" />}
+                                        {p.imagePath && <img src={p.imagePath.startsWith('http') ? p.imagePath : `${BACKEND_URL}${p.imagePath}`} alt="" className="w-full h-full object-cover" />}
                                     </div>
                                 </td>
                                 <td className="px-4 py-3 font-medium">{p.title}</td>

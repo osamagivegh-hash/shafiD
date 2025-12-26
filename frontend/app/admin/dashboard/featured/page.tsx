@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '../../../components/Toast';
 import { Star, Check, X } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
-const BACKEND_URL = 'http://localhost:4000';
+import { API_URL, BACKEND_URL } from '../../../lib/config';
 
 interface Product {
     _id: string;
@@ -83,8 +81,8 @@ export default function FeaturedManagement() {
                         key={cat}
                         onClick={() => setActiveTab(cat)}
                         className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === cat
-                                ? 'bg-amber-500 text-white'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ? 'bg-amber-500 text-white'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             }`}
                     >
                         {categoryLabels[cat]}

@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '../../../components/Toast';
 import { Save, Plus, Edit2, Trash2, X, Truck, MapPin } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
+import { API_URL } from '../../../lib/config';
 
 interface ShippingContent {
     pageTitle: string;

@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '../../../components/Toast';
 import { Save, Phone, Mail, MapPin, Clock, Instagram, Twitter } from 'lucide-react';
-
-const API_URL = 'http://localhost:4000/api/v1';
+import { API_URL } from '../../../lib/config';
 
 interface FooterContent {
     email: string;
