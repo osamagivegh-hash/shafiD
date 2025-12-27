@@ -42,11 +42,11 @@ export default function Header() {
                         </div>
                         <div className="flex flex-col">
                             <div className="flex items-baseline gap-0.5 sm:gap-1">
-                                <span className="text-xl sm:text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">شافي</span>
-                                <span className="text-lg sm:text-2xl font-bold text-gray-800 hidden xs:inline">تمور</span>
-                                <span className="text-lg sm:text-2xl font-bold text-gray-600 hidden sm:inline">وأكثر</span>
+                                <span className="text-lg sm:text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">شافي</span>
+                                <span className="text-base sm:text-2xl font-bold text-gray-800">تمور</span>
+                                <span className="text-base sm:text-2xl font-bold text-gray-600">وأكثر</span>
                             </div>
-                            <p className="text-[10px] sm:text-xs text-gray-500 font-medium tracking-wide">SHAFI DATES & MORE</p>
+                            <p className="text-[9px] sm:text-xs text-gray-500 font-medium tracking-wide">SHAFI DATES & MORE</p>
                         </div>
                     </Link>
 
