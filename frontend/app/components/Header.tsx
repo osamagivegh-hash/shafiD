@@ -24,10 +24,11 @@ export default function Header() {
                 }`}
         >
             {/* Top Bar - Shipping Info */}
-            <div className="bg-gradient-to-r from-amber-600 to-amber-500 text-white text-center py-2 text-sm">
-                <div className="container mx-auto px-4 flex items-center justify-center gap-2">
-                    <Truck size={16} />
-                    <span>شحن مجاني للطلبات فوق 300 ر.س | توصيل سريع لجميع مناطق المملكة</span>
+            <div className="bg-gradient-to-r from-amber-600 to-amber-500 text-white text-center py-1.5 sm:py-2 text-xs sm:text-sm">
+                <div className="container mx-auto px-4 flex items-center justify-center gap-1 sm:gap-2">
+                    <Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="hidden sm:inline">شحن مجاني للطلبات فوق 300 ر.س | توصيل سريع لجميع مناطق المملكة</span>
+                    <span className="sm:hidden">شحن مجاني فوق 300 ر.س | توصيل سريع</span>
                 </div>
             </div>
 
@@ -35,17 +36,17 @@ export default function Header() {
             <div className="container mx-auto px-4 md:px-8">
                 <div className="h-20 flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="w-14 h-14 bg-gradient-to-br from-amber-500 via-amber-600 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                            <span className="text-white text-3xl font-black">ش</span>
+                    <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
+                        <div className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-amber-500 via-amber-600 to-orange-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                            <span className="text-white text-xl sm:text-3xl font-black">ش</span>
                         </div>
-                        <div className="hidden sm:flex flex-col">
-                            <div className="flex items-baseline gap-1">
-                                <span className="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">شافي</span>
-                                <span className="text-2xl font-bold text-gray-800">تمور</span>
-                                <span className="text-2xl font-bold text-gray-600">وأكثر</span>
+                        <div className="flex flex-col">
+                            <div className="flex items-baseline gap-0.5 sm:gap-1">
+                                <span className="text-xl sm:text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">شافي</span>
+                                <span className="text-lg sm:text-2xl font-bold text-gray-800 hidden xs:inline">تمور</span>
+                                <span className="text-lg sm:text-2xl font-bold text-gray-600 hidden sm:inline">وأكثر</span>
                             </div>
-                            <p className="text-xs text-gray-500 font-medium tracking-wide">SHAFI DATES & MORE</p>
+                            <p className="text-[10px] sm:text-xs text-gray-500 font-medium tracking-wide">SHAFI DATES & MORE</p>
                         </div>
                     </Link>
 
